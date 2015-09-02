@@ -6,5 +6,5 @@ import com.uqbar.vainilla.DesktopGameLauncher
  * @author pablitar
  */
 object ArkanoidApp extends App {
-  new DesktopGameLauncher(ArkanoidGame).launch
+  new DesktopGameLauncher(new ArkanoidGame).launch
 }

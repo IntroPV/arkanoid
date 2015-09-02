@@ -6,7 +6,8 @@ import java.awt.Dimension
 /**
  * @author pablitar
  */
-object ArkanoidGame extends Game {
+class ArkanoidGame extends Game {
+  
   def getDisplaySize(): Dimension = {
     new Dimension(800, 600)
   }
@@ -22,4 +23,5 @@ object ArkanoidGame extends Game {
   def setUpScenes(): Unit = {
     this.setCurrentScene(new ArkanoidLevelScene())
   }
+
 }

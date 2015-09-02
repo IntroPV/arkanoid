@@ -4,12 +4,19 @@
 	<groupId>ar.pablitar</groupId>
 	<artifactId>arkanoid</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	
+
 	<dependencies>
+
 		<dependency>
-		<groupId>ar.pablitar</groupId>
-		<artifactId>vainilla-commons</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
+			<groupId>com.uqbar</groupId>
+			<artifactId>vainilla</artifactId>
+			<version>0.0.4</version>
+		</dependency>
+
+		<dependency>
+			<groupId>ar.pablitar</groupId>
+			<artifactId>vainilla-commons</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 
