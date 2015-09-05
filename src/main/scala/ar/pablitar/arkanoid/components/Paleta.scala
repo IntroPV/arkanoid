@@ -11,21 +11,21 @@ import ar.pablitar.vainilla.commons.math.Vector2D
 import ar.pablitar.vainilla.commons.math.Vector2D._
 import ar.pablitar.vainilla.commons.math.Bounds
 import ar.pablitar.vainilla.commons.math.HorizontalBounds
+import ar.pablitar.vainilla.commons.components.SpeedyComponent
 
 /**
  * @author pablitar
  */
-class Paleta extends GameComponent[ArkanoidLevelScene] {
-  val width = 100
-  val height = 50
+class Paleta extends SpeedyComponent[ArkanoidLevelScene] {
+  
+  override val width = 100.0
+  override val height = 50.0
 
   val speedMagnitude = 300
-
-  var speed = Vector2D(0, 0)
   
-  lazy val movementBounds = new HorizontalBounds(0, this.getGame.getDisplayWidth)
+  override lazy val movementBounds = new HorizontalBounds(0, this.getGame.getDisplayWidth)
 
-  this.setAppearance(new Rectangle(Color.BLUE, width, height))
+  this.setAppearance(new Rectangle(Color.BLUE, width.toInt, height.toInt))
 
   override def onSceneActivated = {
     this.alignHorizontalCenterTo(this.getGame.getDisplayWidth / 2)
@@ -45,16 +45,5 @@ class Paleta extends GameComponent[ArkanoidLevelScene] {
     this.applySpeed(state)
   }
 
-  def applySpeed(state: DeltaState) = {
-    this.position += speed * state.getDelta
-  }
-
-  def position_=(v: Vector2D) = {
-    val limited = movementBounds.limit(v, (width, height))
-    this.setX(limited.x1)
-    this.setY(limited.x2)
-  }
-
-  def position = Vector2D(getX, getY)
-
+  
 }

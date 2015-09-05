@@ -6,10 +6,12 @@ import java.awt.Dimension
 /**
  * @author pablitar
  */
-class ArkanoidGame extends Game {
+object ArkanoidGame extends Game {
+  lazy val height = 600
+  lazy val width = 800
   
   def getDisplaySize(): Dimension = {
-    new Dimension(800, 600)
+    new Dimension(width, height)
   }
 
   def getTitle(): String = {
@@ -17,11 +19,10 @@ class ArkanoidGame extends Game {
   }
 
   def initializeResources(): Unit = {
-    
+
   }
 
   def setUpScenes(): Unit = {
     this.setCurrentScene(new ArkanoidLevelScene())
   }
-
 }
