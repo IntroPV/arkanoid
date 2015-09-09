@@ -7,6 +7,7 @@ import java.awt.Color
 import com.uqbar.vainilla.DeltaState
 import com.uqbar.vainilla.colissions.CollisionDetector.{ INSTANCE => Collisions }
 import ar.pablitar.arkanoid.Pared
+import ar.pablitar.vainilla.commons.math.Vector2D
 
 /**
  * @author pablitar
@@ -22,12 +23,15 @@ class Pelota extends SpeedyComponent[ArkanoidLevelScene] {
 
   override def onSceneActivated = {
     this.alignHorizontalCenterTo(this.getGame.getDisplayWidth / 2)
+    this.alignVerticalCenterTo(this.getGame.getDisplayHeight * 0.1)
   }
 
   override def update(state: DeltaState) = {
     this.comprobarColisionConPaleta
     this.comprobarColisionConParedes
 
+    this.comprobrarDebajoDePantalla    
+    
     super.update(state)
   }
 
@@ -59,4 +63,17 @@ class Pelota extends SpeedyComponent[ArkanoidLevelScene] {
   def rebotaConPared(pared: Pared) = {
     this.speed = (-2 * this.speed.proyectTo(pared.normal)) + this.speed
   }
+  
+  def isBelowTheScreen = {
+    this.position.x2 >= this.getGame.getDisplayHeight
+  }
+
+  def comprobrarDebajoDePantalla = {
+    if(isBelowTheScreen) {
+      this.getScene.seFuePelota(this)
+      this.destroy()
+    }
+  }
+
+  
 }
