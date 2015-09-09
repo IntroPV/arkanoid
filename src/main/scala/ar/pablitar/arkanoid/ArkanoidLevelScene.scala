@@ -8,6 +8,16 @@ import ar.pablitar.arkanoid.components.Pelota
  * @author pablitar
  */
 class ArkanoidLevelScene extends GameScene {
-  this.addComponent(new Paleta)
+	val paleta = new Paleta
+
+  this.addComponent(paleta)
   this.addComponent(new Pelota)
+  
+  def paredes = {
+   List(
+        Pared((0, 0), (1, 0)),
+        Pared((0, 0),(0, 1)),
+        Pared((getGame.getDisplayWidth, 0),(-1, 0))
+   )
+  }
 }

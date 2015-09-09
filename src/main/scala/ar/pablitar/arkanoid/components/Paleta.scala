@@ -34,6 +34,7 @@ class Paleta extends SpeedyComponent[ArkanoidLevelScene] {
 
   override def update(state: DeltaState) = {
     this.speed = (0, 0)
+    
     if (state.isKeyBeingHold(Key.LEFT)) {
       this.speed += (-speedMagnitude, 0)
     }
@@ -42,7 +43,7 @@ class Paleta extends SpeedyComponent[ArkanoidLevelScene] {
       this.speed += (speedMagnitude, 0)
     }
 
-    this.applySpeed(state)
+    super.update(state)
   }
 
   
