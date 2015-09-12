@@ -8,6 +8,7 @@ import ar.pablitar.vainilla.commons.math.Vector2D
 case class Pared(puntoInterno: Vector2D, normal: Vector2D) {
   
   def circuloPasoDetras(centro: Vector2D, radio: Double) = {
-    (centro - puntoInterno).proyectTo(normal).isOppositeTo(normal)
+    val proyecteVector = (centro - puntoInterno).proyectTo(normal)
+    proyecteVector.module < radio
   }
 }

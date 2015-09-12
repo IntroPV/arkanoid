@@ -8,6 +8,7 @@ import com.uqbar.vainilla.DeltaState
 import com.uqbar.vainilla.colissions.CollisionDetector.{ INSTANCE => Collisions }
 import ar.pablitar.arkanoid.Pared
 import ar.pablitar.vainilla.commons.math.Vector2D
+import ar.pablitar.vainilla.commons.math.PhysicsUtils
 
 /**
  * @author pablitar
@@ -61,7 +62,7 @@ class Pelota extends SpeedyComponent[ArkanoidLevelScene] {
   }
 
   def rebotaConPared(pared: Pared) = {
-    this.speed = (-2 * this.speed.proyectTo(pared.normal)) + this.speed
+    this.speed = PhysicsUtils.rebound(this.speed, pared.normal)
   }
   
   def isBelowTheScreen = {
