@@ -15,42 +15,42 @@ import ar.pablitar.arkanoid.Pared
 /**
  * @author pablitar
  */
-class Ladrillo(aPosition: Vector2D) extends RichGameComponent[ArkanoidLevelScene] {
-  
+class Ladrillo(c: Color)(aPosition: Vector2D) extends RichGameComponent[ArkanoidLevelScene] {
+
   this.position = aPosition
-  
-  this.setAppearance(new Rectangle(Color.GREEN, 80, 40));
-  
-  
+
+  this.setAppearance(new Rectangle(c, Ladrillo.width, Ladrillo.height));
+
   override def update(state: DeltaState) = {
     this.getScene.pelotas.foreach { pelota => this.comprobarColisionCon(pelota) }
   }
 
   def comprobarColisionCon(pelota: Pelota) = {
     //TODO: Las colisiones quizás queremos manejarlas con una abstración del estilo Body, o algo así
-    if(Collisions.collidesCircleAgainstRect(pelota.getX, pelota.getY, pelota.radius, this.getX, this.getY, width, height)) {
+    if (Collisions.collidesCircleAgainstRect(pelota.getX, pelota.getY, pelota.radius, this.getX, this.getY, width, height)) {
       this.hacerRebotar(pelota)
       this.destroy()
     }
   }
 
   def hacerRebotar(pelota: Pelota) = {
-     pelota.speed = PhysicsUtils.rebound(pelota.speed, normalRebote(pelota))
+    pelota.speed = PhysicsUtils.rebound(pelota.speed, normalRebote(pelota))
   }
-  
+
   def normalRebote(pelota: Pelota) = {
-    if(pelota.getX >= this.position.x1 && pelota.getX <= this.bottomRight.x1) {
-      if(pelota.getY  >= this.bottomLeft.x2) {
-        Vector2D(0, 1)
-      } else {
-        Vector2D(0, -1)
-      }
-    } else {
-      if(pelota.getX >= this.bottomRight.x1) {
-        Vector2D(1, 0)
-      } else {
-        Vector2D(-1, 0)
-      }
-    }
+    paredes.find { p => !p.puntoEstaDetras(pelota.center) }.get.normal
   }
+
+  lazy val paredes = {
+    List(
+      Pared(this.topLeft, (0, -1)),
+      Pared(this.bottomRight, (0, 1)),
+      Pared(this.topLeft, (-1, 0)),
+      Pared(this.bottomRight, (1, 0)))
+  }
+}
+
+object Ladrillo {
+  val width = 80
+  val height = 40
 }

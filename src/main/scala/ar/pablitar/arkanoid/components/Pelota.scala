@@ -15,16 +15,16 @@ import ar.pablitar.vainilla.commons.math.PhysicsUtils
  */
 class Pelota extends SpeedyComponent[ArkanoidLevelScene] {
 
-  val radius = 30.0
+  val radius = 15.0
   val diameter = radius * 2
+  
+  val speedMagnitued = 300
 
   this.setAppearance(new Circle(Color.RED, diameter.toInt))
 
-  speed = (0, 300)
-
   override def onSceneActivated = {
-    this.alignHorizontalCenterTo(this.getGame.getDisplayWidth / 2)
-    this.alignVerticalCenterTo(this.getGame.getDisplayHeight * 0.1)
+    this.alignHorizontalCenterTo(getGame.getDisplayWidth / 2)
+    getScene.paleta.attach(this)
   }
 
   override def update(state: DeltaState) = {

@@ -5,6 +5,7 @@ import ar.pablitar.arkanoid.components.Paleta
 import ar.pablitar.arkanoid.components.Pelota
 import scala.collection.mutable.ArrayBuffer
 import ar.pablitar.arkanoid.components.Ladrillo
+import ar.pablitar.arkanoid.levels.Level1
 
 /**
  * @author pablitar
@@ -16,7 +17,7 @@ class ArkanoidLevelScene extends GameScene {
   this.addComponent(paleta)
   this.addPelota()
   
-  this.addComponent(new Ladrillo(30, 200))
+  Level1.loadToScene(this)
   
   var vidas = 3
   
