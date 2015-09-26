@@ -15,8 +15,8 @@ object Level1 extends Level {
   val filasDeLadrillos: List[FilaLadrillos] = List(
     RED * 8,
     GREEN * 8,
-    None * 8,
+    BLUE * 1 ++ None * 6 ++ BLUE * 1,
     BLACK * 8,
-    WHITE * 3 ++ None * 2 ++ WHITE * 3)
+    ORANGE * 3 ++ None * 2 ++ ORANGE * 3)
 
 }

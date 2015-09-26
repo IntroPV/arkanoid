@@ -38,7 +38,7 @@ class Ladrillo(c: Color)(aPosition: Vector2D) extends RichGameComponent[Arkanoid
   }
 
   def normalRebote(pelota: Pelota) = {
-    paredes.find { p => !p.puntoEstaDetras(pelota.center) }.get.normal
+    paredes.find { p => !p.puntoEstaDetras(pelota.center) }.map(_.normal).getOrElse(Vector2D(0,-1))
   }
 
   lazy val paredes = {

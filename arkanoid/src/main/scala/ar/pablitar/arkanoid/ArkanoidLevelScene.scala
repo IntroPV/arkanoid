@@ -17,6 +17,8 @@ class ArkanoidLevelScene extends GameScene {
   this.addComponent(paleta)
   this.addPelota()
   
+  this.addEditor()
+  
   Level1.loadToScene(this)
   
   var vidas = 3
@@ -50,4 +52,8 @@ class ArkanoidLevelScene extends GameScene {
     this.pelotas += pelota
     pelota
   }
+
+  def addEditor() = {
+	  this.addComponent(new Editor)
+	}
 }
