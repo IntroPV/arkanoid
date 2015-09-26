@@ -13,7 +13,7 @@ import com.uqbar.vainilla.events.constants.MouseButton
  */
 class Editor extends GameComponent[ArkanoidLevelScene]{
   var editando = false
-  var constructorLadrilloActual = new Ladrillo(Color.RED)(_)
+  var constructorLadrilloActual = new Ladrillo(Color.RED)()(_)
   def ladrilloActual = constructorLadrilloActual(0,0)
   override def update(state: DeltaState) = {
     if(state.isKeyPressed(Key.E)) {

@@ -25,7 +25,7 @@ abstract class Level {
     }
   }
 
-  implicit def constructorLadrilloFromOption(c: Color) = Some(new Ladrillo(c)(_))
+  implicit def constructorLadrilloFromOption(c: Color) = Some(new Ladrillo(c)()(_))
   implicit def filaLadrillosFromOption(o: Option[ConstructorLadrillo]) = List(o)
 
   def filasDeLadrillos: Seq[FilaLadrillos]

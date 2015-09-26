@@ -15,11 +15,13 @@ import ar.pablitar.arkanoid.Pared
 /**
  * @author pablitar
  */
-class Ladrillo(c: Color, var vidas: Int = 1)(aPosition: Vector2D) extends RichGameComponent[ArkanoidLevelScene] {
+class Ladrillo(c: Color*)(var vidas: Int = 1)(aPosition: Vector2D) extends RichGameComponent[ArkanoidLevelScene] {
 
+  val maxVidas = vidas
+  
   this.position = aPosition
-
-  this.setAppearance(new Rectangle(c, Ladrillo.width, Ladrillo.height));
+  
+  this.setAppearance(aparienciaActual);
 
   override def update(state: DeltaState) = {
     this.getScene.pelotas.foreach { pelota => this.comprobarColisionCon(pelota) }
@@ -54,6 +56,8 @@ class Ladrillo(c: Color, var vidas: Int = 1)(aPosition: Vector2D) extends RichGa
     this.vidas -= 1
     if (vidas <= 0) {
       this.destroy()
+    } else {
+      this.setAppearance(aparienciaActual)
     }
   }
 
@@ -64,9 +68,17 @@ class Ladrillo(c: Color, var vidas: Int = 1)(aPosition: Vector2D) extends RichGa
   def puntaje = {
     10
   }
+  
+  def aparienciaActual = {
+    val colorActual = c((maxVidas - vidas) % c.length)
+    new Rectangle(colorActual, Ladrillo.width, Ladrillo.height)
+  }
 }
 
 object Ladrillo {
   val width = 80
   val height = 40
+  
+  val blanco = Some(new Ladrillo(Color.WHITE)()(_))
+  val verde = Some(new Ladrillo(Color.GREEN, Color.RED)(2)(_))
 }
