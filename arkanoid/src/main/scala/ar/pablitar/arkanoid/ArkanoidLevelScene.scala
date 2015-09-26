@@ -54,7 +54,7 @@ class ArkanoidLevelScene extends GameScene {
   }
 
   def addPelota() = {
-    val pelota = new Pelota
+    val pelota = new Pelota(Jugador.uno)
     this.addComponent(pelota)
     this.pelotas += pelota
     pelota

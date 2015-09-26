@@ -30,6 +30,7 @@ class Ladrillo(c: Color, var vidas: Int = 1)(aPosition: Vector2D) extends RichGa
     if (Collisions.collidesCircleAgainstRect(pelota.getX, pelota.getY, pelota.radius, this.getX, this.getY, width, height)) {
       this.hacerRebotar(pelota)
       this.restaVida()
+      this.sumaPuntos(pelota)
     }
   }
 
@@ -54,6 +55,14 @@ class Ladrillo(c: Color, var vidas: Int = 1)(aPosition: Vector2D) extends RichGa
     if (vidas <= 0) {
       this.destroy()
     }
+  }
+
+  def sumaPuntos(pelota: Pelota) = {
+    pelota.jugador.sumaPuntos(this.puntaje)
+  }
+
+  def puntaje = {
+    10
   }
 }
 

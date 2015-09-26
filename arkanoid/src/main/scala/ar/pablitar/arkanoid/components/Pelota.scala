@@ -9,11 +9,12 @@ import com.uqbar.vainilla.colissions.CollisionDetector.{ INSTANCE => Collisions 
 import ar.pablitar.arkanoid.Pared
 import ar.pablitar.vainilla.commons.math.Vector2D
 import ar.pablitar.vainilla.commons.math.PhysicsUtils
+import ar.pablitar.arkanoid.Jugador
 
 /**
  * @author pablitar
  */
-class Pelota extends SpeedyComponent[ArkanoidLevelScene] {
+class Pelota(val jugador:Jugador) extends SpeedyComponent[ArkanoidLevelScene] {
 
   val radius = 15.0
   val diameter = radius * 2
