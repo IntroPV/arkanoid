@@ -12,17 +12,13 @@ import com.uqbar.vainilla.DeltaState
 /**
  * @author pablitar
  */
-class ScoreDisplay(j: Jugador) extends GameComponent[ArkanoidLevelScene] {
-  val label = Styles.infoText(scoreAsText)
-  this.setAppearance(label)
-
-  this.move(10, 10)
-
-  override def update(state: DeltaState) = {
-    label.setText(scoreAsText)
-  }
-  def scoreAsText = {
+class ScoreDisplay(j: Jugador) extends Display{
+  this.alignVerticalCenterTo(20)
+  this.alignLeftTo(10)
+  
+  def textGetter = {
     "Score: " + j.score.toString
   }
+  
 }
 

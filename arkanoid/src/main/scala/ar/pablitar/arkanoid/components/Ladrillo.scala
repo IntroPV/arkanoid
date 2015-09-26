@@ -15,7 +15,7 @@ import ar.pablitar.arkanoid.Pared
 /**
  * @author pablitar
  */
-class Ladrillo(c: Color, vidas: Int = 1)(aPosition: Vector2D) extends RichGameComponent[ArkanoidLevelScene] {
+class Ladrillo(c: Color, var vidas: Int = 1)(aPosition: Vector2D) extends RichGameComponent[ArkanoidLevelScene] {
 
   this.position = aPosition
 
@@ -29,7 +29,7 @@ class Ladrillo(c: Color, vidas: Int = 1)(aPosition: Vector2D) extends RichGameCo
     //TODO: Las colisiones quizás queremos manejarlas con una abstración del estilo Body, o algo así
     if (Collisions.collidesCircleAgainstRect(pelota.getX, pelota.getY, pelota.radius, this.getX, this.getY, width, height)) {
       this.hacerRebotar(pelota)
-      this.destroy()
+      this.restaVida()
     }
   }
 
@@ -38,7 +38,7 @@ class Ladrillo(c: Color, vidas: Int = 1)(aPosition: Vector2D) extends RichGameCo
   }
 
   def normalRebote(pelota: Pelota) = {
-    paredes.find { p => !p.puntoEstaDetras(pelota.center) }.map(_.normal).getOrElse(Vector2D(0,-1))
+    paredes.find { p => !p.puntoEstaDetras(pelota.center) }.map(_.normal).getOrElse(Vector2D(0, -1))
   }
 
   lazy val paredes = {
@@ -47,6 +47,13 @@ class Ladrillo(c: Color, vidas: Int = 1)(aPosition: Vector2D) extends RichGameCo
       Pared(this.bottomRight, (0, 1)),
       Pared(this.topLeft, (-1, 0)),
       Pared(this.bottomRight, (1, 0)))
+  }
+
+  def restaVida() = {
+    this.vidas -= 1
+    if (vidas <= 0) {
+      this.destroy()
+    }
   }
 }
 

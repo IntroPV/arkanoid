@@ -1,6 +1,5 @@
 package ar.pablitar.arkanoid
 
-import ar.pablitar.arkanoid.components.ScoreDisplay
 import ar.pablitar.arkanoid.components.Paleta
 import ar.pablitar.arkanoid.components.Pelota
 import scala.collection.mutable.ArrayBuffer
@@ -10,6 +9,7 @@ import ar.pablitar.arkanoid.components.ScoreDisplay
 import com.uqbar.vainilla.GameScene
 import ar.pablitar.arkanoid.components.PlainBackground
 import java.awt.Color
+import ar.pablitar.arkanoid.components.VidasDisplay
 
 /**
  * @author pablitar
@@ -69,6 +69,6 @@ class ArkanoidLevelScene extends GameScene {
 	}
 
   def addVidas() = {
-	  //???
+	  this.addComponent(new VidasDisplay(Jugador.uno))
 	}
 }
