@@ -15,7 +15,7 @@ import ar.pablitar.arkanoid.Pared
 /**
  * @author pablitar
  */
-class Ladrillo(c: Color)(aPosition: Vector2D) extends RichGameComponent[ArkanoidLevelScene] {
+class Ladrillo(c: Color, vidas: Int = 1)(aPosition: Vector2D) extends RichGameComponent[ArkanoidLevelScene] {
 
   this.position = aPosition
 

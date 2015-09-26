@@ -1,11 +1,15 @@
 package ar.pablitar.arkanoid
 
-import com.uqbar.vainilla.GameScene
+import ar.pablitar.arkanoid.components.ScoreDisplay
 import ar.pablitar.arkanoid.components.Paleta
 import ar.pablitar.arkanoid.components.Pelota
 import scala.collection.mutable.ArrayBuffer
 import ar.pablitar.arkanoid.components.Ladrillo
 import ar.pablitar.arkanoid.levels.Level1
+import ar.pablitar.arkanoid.components.ScoreDisplay
+import com.uqbar.vainilla.GameScene
+import ar.pablitar.arkanoid.components.PlainBackground
+import java.awt.Color
 
 /**
  * @author pablitar
@@ -13,6 +17,8 @@ import ar.pablitar.arkanoid.levels.Level1
 class ArkanoidLevelScene extends GameScene {
 	val paleta = new Paleta
   val pelotas = ArrayBuffer.empty[Pelota]
+  
+  this.addComponent(new PlainBackground(new Color(40,40,40)))
 
   this.addComponent(paleta)
   this.addPelota()
@@ -21,8 +27,9 @@ class ArkanoidLevelScene extends GameScene {
   
   Level1.loadToScene(this)
   
-  var vidas = 3
-  
+  this.addScore()
+  this.addVidas()
+ 
   def paredes = {
    List(
         Pared((0, 0), (1, 0)),
@@ -37,7 +44,7 @@ class ArkanoidLevelScene extends GameScene {
   }
 
   def perdioVida() = {
-	  vidas -= 1
+	  Jugador.uno.vidas -= 1
     reiniciarEscena()
 	}
 
@@ -55,5 +62,13 @@ class ArkanoidLevelScene extends GameScene {
 
   def addEditor() = {
 	  this.addComponent(new Editor)
+	}
+
+  def addScore() = {
+	  this.addComponent(new ScoreDisplay(Jugador.uno))
+	}
+
+  def addVidas() = {
+	  //???
 	}
 }
