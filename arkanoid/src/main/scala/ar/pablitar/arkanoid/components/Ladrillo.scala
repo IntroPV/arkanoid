@@ -30,9 +30,9 @@ class Ladrillo(c: Color*)(var vidas: Int = 1)(aPosition: Vector2D) extends RichG
   def comprobarColisionCon(pelota: Pelota) = {
     //TODO: Las colisiones quizás queremos manejarlas con una abstración del estilo Body, o algo así
     if (Collisions.collidesCircleAgainstRect(pelota.getX, pelota.getY, pelota.radius, this.getX, this.getY, width, height)) {
-      this.hacerRebotar(pelota)
-      this.restaVida()
-      this.sumaPuntos(pelota)
+      val vidasAnterior = this.vidas
+      pelota.impacta(this)
+      this.sumaPuntos(pelota, vidasAnterior)
     }
   }
 
@@ -44,13 +44,12 @@ class Ladrillo(c: Color*)(var vidas: Int = 1)(aPosition: Vector2D) extends RichG
     paredes.find { p => !p.puntoEstaDetras(pelota.center) }.map(_.normal).getOrElse(Vector2D(0, -1))
   }
 
-  lazy val paredes = {
+  lazy val paredes = 
     List(
       Pared(this.topLeft, (0, -1)),
       Pared(this.bottomRight, (0, 1)),
       Pared(this.topLeft, (-1, 0)),
       Pared(this.bottomRight, (1, 0)))
-  }
 
   def restaVida() = {
     this.vidas -= 1
@@ -61,8 +60,8 @@ class Ladrillo(c: Color*)(var vidas: Int = 1)(aPosition: Vector2D) extends RichG
     }
   }
 
-  def sumaPuntos(pelota: Pelota) = {
-    pelota.jugador.sumaPuntos(this.puntaje)
+  def sumaPuntos(pelota: Pelota, vidasAnterior: Int) = {
+    pelota.jugador.sumaPuntos(this.puntaje * (vidasAnterior - vidas))
   }
 
   def puntaje = {
@@ -72,6 +71,11 @@ class Ladrillo(c: Color*)(var vidas: Int = 1)(aPosition: Vector2D) extends RichG
   def aparienciaActual = {
     val colorActual = c((maxVidas - vidas) % c.length)
     new Rectangle(colorActual, Ladrillo.width, Ladrillo.height)
+  }
+
+  def destruir = {
+    this.vidas = 0
+    this.destroy()
   }
 }
 

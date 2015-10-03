@@ -10,6 +10,7 @@ import com.uqbar.vainilla.GameScene
 import ar.pablitar.arkanoid.components.PlainBackground
 import java.awt.Color
 import ar.pablitar.arkanoid.components.VidasDisplay
+import scala.util.Random
 
 /**
  * @author pablitar
@@ -71,4 +72,6 @@ class ArkanoidLevelScene extends GameScene {
   def addVidas() = {
 	  this.addComponent(new VidasDisplay(Jugador.uno))
 	}
+  
+  lazy val randomizer = new Random
 }
