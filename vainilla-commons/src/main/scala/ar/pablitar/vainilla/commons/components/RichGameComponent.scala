@@ -9,7 +9,7 @@ import ar.pablitar.vainilla.commons.math.InfiniteBounds
 /**
  * @author pablitar
  */
-class RichGameComponent[T <: GameScene] extends GameComponent[T] {
+class RichGameComponent[T <: GameScene] extends GameComponent[T] with Positionable {
   def width: Double = this.getAppearance.getWidth
   def height: Double = this.getAppearance.getHeight
 
