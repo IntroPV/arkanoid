@@ -9,7 +9,7 @@ import com.uqbar.vainilla.events.constants.Key
 class CameraKeyboardMover(camera: Camera) extends GameComponent[GameScene]{
   
   override def update(state: DeltaState) = {
-    val delta = 200 * state.getDelta
+    val delta = 300 * state.getDelta
     if(state.isKeyBeingHold(Key.LEFT)) {
       camera.position -= (delta, 0.0)
     }

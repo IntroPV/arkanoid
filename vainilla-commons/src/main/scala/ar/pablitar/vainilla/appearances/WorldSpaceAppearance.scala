@@ -9,7 +9,8 @@ import com.uqbar.vainilla.DeltaState
 trait WorldSpaceAppearance extends Appearance {
   def camera: Camera
   def render(component: GameComponent[_], graphics: Graphics2D): Unit = {
-    val screenPosition = camera.toWorldFromLocal(component.position)
+    val screenPosition = camera.toLocalFromWorld(component.position)
+    
     doRenderAt(screenPosition.x1, screenPosition.x2, graphics)
   }
   

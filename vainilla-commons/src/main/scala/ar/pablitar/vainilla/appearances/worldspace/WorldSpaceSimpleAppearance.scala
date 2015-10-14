@@ -4,16 +4,16 @@ import ar.pablitar.vainilla.appearances.WorldSpaceAppearance
 import java.awt.Color
 import ar.pablitar.vainilla.appearances.Camera
 import java.awt.Graphics2D
+import com.uqbar.vainilla.appearances.SimpleAppearance
 import com.uqbar.vainilla.appearances.Appearance
 
-case class Circle(val diameter: Double, color: Color)(implicit val camera: Camera) extends WorldSpaceAppearance {
+case class WorldSpaceSimpleAppearance(sp: SimpleAppearance[_])(implicit val camera: Camera = new Camera) extends WorldSpaceAppearance {
+  def height = sp.getHeight
+  def width = sp.getWidth
+  
   def doRenderAt(x: Double, y: Double, graphics: Graphics2D): Unit = {
-    graphics.setColor(this.color);
-    graphics.fillOval(x.toInt, y.toInt, this.diameter.toInt, this.diameter.toInt);
+    sp.renderAt(x.toInt, y.toInt, graphics)
   }
   
-  def height = diameter
-  def width = diameter
-  
-  def doCopy = Circle(diameter, color)
+  def doCopy = WorldSpaceSimpleAppearance(sp)
 }
