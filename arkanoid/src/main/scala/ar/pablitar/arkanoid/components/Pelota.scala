@@ -23,7 +23,7 @@ class Pelota(val jugador: Jugador) extends SpeedyComponent[ArkanoidLevelScene] {
 
   val speedMagnitued = 300
 
-  val probabilidadGolpeCritico = 0.5
+  val probabilidadGolpeCritico = 0.02
 
   this.setAppearance(new Circle(Color.RED, diameter.toInt))
 
@@ -37,7 +37,7 @@ class Pelota(val jugador: Jugador) extends SpeedyComponent[ArkanoidLevelScene] {
     this.comprobarColisionConParedes
 
     this.comprobrarDebajoDePantalla
-
+    
     super.update(state)
   }
 
@@ -53,14 +53,14 @@ class Pelota(val jugador: Jugador) extends SpeedyComponent[ArkanoidLevelScene] {
   }
 
   def rebotaDesde(paleta: Paleta) = {
-    val direccionReboteVersor = (this.center - paleta.center).versor
+    val direccionReboteVersor = (this.center() - paleta.center()).versor
 
     speed = speed.module * direccionReboteVersor
   }
 
   def comprobarColisionConParedes = {
     getScene.paredes.foreach { pared =>
-      if (pared.circuloPasoDetras(this.center, radius)) {
+      if (pared.circuloPasoDetras(this.center(), radius)) {
         this.rebotaConPared(pared)
       }
     }

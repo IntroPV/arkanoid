@@ -41,15 +41,15 @@ class Ladrillo(c: Color*)(var vidas: Int = 1)(aPosition: Vector2D) extends RichG
   }
 
   def normalRebote(pelota: Pelota) = {
-    paredes.find { p => !p.puntoEstaDetras(pelota.center) }.map(_.normal).getOrElse(Vector2D(0, -1))
+    paredes.find { p => !p.puntoEstaDetras(pelota.center()) }.map(_.normal).getOrElse(Vector2D(0, -1))
   }
 
   lazy val paredes = 
     List(
-      Pared(this.topLeft, (0, -1)),
-      Pared(this.bottomRight, (0, 1)),
-      Pared(this.topLeft, (-1, 0)),
-      Pared(this.bottomRight, (1, 0)))
+      Pared(this.topLeft(), (0, -1)),
+      Pared(this.bottomRight(), (0, 1)),
+      Pared(this.topLeft(), (-1, 0)),
+      Pared(this.bottomRight(), (1, 0)))
 
   def restaVida() = {
     this.vidas -= 1
